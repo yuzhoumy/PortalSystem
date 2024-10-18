@@ -1,0 +1,8 @@
+name: PortalSystem
+version: '${project.version}'
+main: quest.yuzhou.portalsystem.PortalSystem
+api-version: '1.19'
+commands:
+  porman:
+    usage: /<command>
+    description: The portal manager

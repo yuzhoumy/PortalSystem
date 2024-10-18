@@ -1,0 +1,34 @@
+prefix: [PortalSystem]
+mainWorld: main
+virtualWorld: virtual
+portalMaterial: beacon
+virtualPortalYCoordinate: 70
+savePortalMaxTries: 5
+portalPrice: 100000
+portalRefund: 50000
+portalBlockType:
+  - END_STONE
+  - PURPUR_BLOCK
+  - PRISMARINE_BRICKS
+  - DARK_PRISMARINE
+  - NETHERRACK
+  - BASALT
+  - BLACKSTONE
+  - GILDED_BLACKSTONE
+  - CRYING_OBSIDIAN
+  - NETHER_BRICKS
+  - RED_NETHER_BRICKS
+  - DEEPSLATE
+  - DEEPSLATE_TILES
+  - DEEPSLATE_BRICKS
+  - ANVIL
+  - ENDER_CHEST
+  - SHULKER_BOX
+  - OBSIDIAN
+  - ANCIENT_DEBRIS
+  - NETHERITE_BLOCK
+portalBlockUpgradeBasePrice: 10000
+portalBlockUpgradePercentage: 0.2
+maxBlockHp: 3000
+portalBlockRepairPricePer100: 20
+portalDangerHp: 1000

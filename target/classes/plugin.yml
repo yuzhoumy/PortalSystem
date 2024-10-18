@@ -1,0 +1,8 @@
+name: PortalSystem
+version: '1.0-SNAPSHOT'
+main: quest.yuzhou.portalsystem.PortalSystem
+api-version: '1.19'
+commands:
+  porman:
+    usage: /<command>
+    description: The portal manager
