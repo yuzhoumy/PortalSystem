@@ -1,14 +1,14 @@
 package quest.yuzhou.portalsystem.Commands.SubCommands;
 
 import org.bukkit.command.CommandSender;
-import quest.yuzhou.portalsystem.Commands.SubCommand;
+import quest.yuzhou.portalsystem.Commands.AdminSubCommand;
 
 import java.io.IOException;
 
 import static quest.yuzhou.portalsystem.PortalSystem.getPlugin;
 import static quest.yuzhou.portalsystem.Utilities.PortalStorageUtil.savePortals;
 
-public class saveportalCommand extends SubCommand {
+public class saveportalCommand extends AdminSubCommand {
     @Override
     public String getName() {
         return "saveportal";

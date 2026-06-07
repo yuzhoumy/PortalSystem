@@ -3,13 +3,12 @@ package quest.yuzhou.portalsystem.Utilities;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.A;
 import quest.yuzhou.portalsystem.Modal.Portal;
+import quest.yuzhou.portalsystem.PortalSystem;
 /*import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.WorldEditException;
@@ -26,7 +25,6 @@ import com.sk89q.worldedit.session.ClipboardHolder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;*/
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,10 +39,12 @@ public class Utilities {
         int x = location.getBlockX();
         int z = location.getBlockZ();
 
-        FileConfiguration RCPasteGradleConfig = Bukkit.getPluginManager().getPlugin("RCPasteGrandle").getConfig();
-        ConfigurationSection pasteSection = RCPasteGradleConfig.getConfigurationSection("paste");
+        if (location.getBlock().getType() != Material.AIR || location.add(0, 1, 0).getBlock().getType() != Material.AIR) return false;
+
+        FileConfiguration ResourcePointConfig = Bukkit.getPluginManager().getPlugin("ResourcePoint").getConfig();
+        ConfigurationSection pasteSection = ResourcePointConfig.getConfigurationSection("paste");
         for (String key : pasteSection.getKeys(false)) {
-            List<String> locs = pasteSection.getStringList(key + ".locs");
+            List<String> locs = pasteSection.getStringList(key + ".locations");
             int sizeX = Integer.parseInt(pasteSection.getString(key + ".size").split(",")[0]);
             int sizeZ = Integer.parseInt(pasteSection.getString(key + ".size").split(",")[1]);
             for (String loc : locs) {
@@ -65,7 +65,7 @@ public class Utilities {
         ArrayList<Portal> portals = getPortals();
 
         if (portals == null) {
-            getPlugin().getLogger().info("[PortalSystem] Portals Object is Null arggggggggggggggggggggggggghhhhhhhhhhhh");
+            getPlugin().getLogger().info("[PortalSystem] Portals Object is Null");
             return true;
         }
 
@@ -94,6 +94,7 @@ public class Utilities {
 
     public static boolean isPlayerInRadius(Player player, Location centerLocation, double radius) {
         Location playerLocation = player.getLocation();
+        if (playerLocation.getWorld() != PortalSystem.mainWorld) return false;
         double distance = playerLocation.distance(centerLocation);
         return distance <= radius;
     }

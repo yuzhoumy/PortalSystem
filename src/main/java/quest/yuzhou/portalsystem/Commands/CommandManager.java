@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import quest.yuzhou.portalsystem.Commands.SubCommands.*;
 
 import java.util.ArrayList;
@@ -38,16 +39,17 @@ public class CommandManager implements CommandExecutor {
                     return true;
                 }
             }
-            commandSender.sendMessage(ChatColor.GREEN + "------傳送門系統------");
-            for (int i = 0; i < getSubCommands().size(); i++) {
-                commandSender.sendMessage(getSubCommands().get(i).getSyntax() + " " + ChatColor.AQUA + getSubCommands().get(i).getDescription());
-            }
-        } else {
-            commandSender.sendMessage(ChatColor.GREEN + "------傳送門系統------");
-            for (int i = 0; i < getSubCommands().size(); i++) {
-                commandSender.sendMessage(getSubCommands().get(i).getSyntax() + " " + ChatColor.AQUA + getSubCommands().get(i).getDescription());
-            }
         }
+
+        commandSender.sendMessage(ChatColor.GREEN + "------傳送門系統------");
+        for (SubCommand subCommand : getSubCommands()) {
+            if (subCommand instanceof AdminSubCommand && commandSender instanceof Player && !commandSender.isOp()) {
+                continue;
+            }
+
+            commandSender.sendMessage(subCommand.getSyntax() + " " + ChatColor.AQUA + subCommand.getDescription());
+        }
+
 
         return true;
     }

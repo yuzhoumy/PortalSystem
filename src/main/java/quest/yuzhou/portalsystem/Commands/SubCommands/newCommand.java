@@ -96,7 +96,7 @@ public class newCommand extends SubCommand {
                     }
 
                     if (!isValidCoordinate(p.getLocation())) {
-                        p.sendMessage(prefix + " 這個坐標與資源點衝突，請找另一個位置。");
+                        p.sendMessage(prefix + " 這個坐標與資源點衝突，或者這個位置已經被占據了，請找另一個位置。");
                         return;
                     }
 

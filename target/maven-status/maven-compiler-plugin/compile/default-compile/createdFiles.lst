@@ -9,6 +9,7 @@ quest\yuzhou\portalsystem\Commands\SubCommands\reloadCommand.class
 quest\yuzhou\portalsystem\Commands\SubCommands\addmemberCommand.class
 quest\yuzhou\portalsystem\PortalSystem.class
 quest\yuzhou\portalsystem\Commands\SubCommands\removeadminCommand.class
+quest\yuzhou\portalsystem\Commands\AdminSubCommand.class
 quest\yuzhou\portalsystem\Commands\TabCompleter.class
 quest\yuzhou\portalsystem\Listeners\ChunkInteractRestriction.class
 quest\yuzhou\portalsystem\Modal\Portal.class

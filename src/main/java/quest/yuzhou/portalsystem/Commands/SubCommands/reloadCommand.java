@@ -3,12 +3,12 @@ package quest.yuzhou.portalsystem.Commands.SubCommands;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import quest.yuzhou.portalsystem.Commands.SubCommand;
+import quest.yuzhou.portalsystem.Commands.AdminSubCommand;
 
 import static quest.yuzhou.portalsystem.PortalSystem.getPlugin;
 import static quest.yuzhou.portalsystem.PortalSystem.prefix;
 
-public class reloadCommand extends SubCommand {
+public class reloadCommand extends AdminSubCommand {
 
     @Override
     public String getName() {

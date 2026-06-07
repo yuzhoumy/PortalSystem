@@ -89,7 +89,7 @@ public class deleteCommand extends SubCommand {
                 return;
             }
 
-            p.sendMessage(prefix + ChatColor.RED + " 你確定您要刪除傳送門&基地？" + ChatColor.AQUA + args[1] + ChatColor.RED + " 嗎？");
+            p.sendMessage(prefix + ChatColor.RED + " 你確定您要刪除傳送門&基地" + ChatColor.AQUA + args[1] + ChatColor.RED + " 嗎？");
             p.sendMessage(prefix + ChatColor.RED + " 您有30秒的時間決定。如果您確定要刪除，請輸入/porman delete confirm");
             if (!readyToConfirm.containsKey(p)) {
                 readyToConfirm.put(p, args[1]);

@@ -64,7 +64,12 @@ public final class PortalSystem extends JavaPlugin {
         }
 
         if (!isPortalBlockTypeConfigValid()) {
-            getLogger().info( " Disabling plugin...");
+            getLogger().severe("Portal Block Type in config is invalid!");
+            getPluginLoader().disablePlugin(this);
+        }
+
+        if (getServer().getPluginManager().getPlugin("ResourcePoint") == null) {
+            getLogger().severe(" ResourcePoint plugin not found!");
             getPluginLoader().disablePlugin(this);
         }
 

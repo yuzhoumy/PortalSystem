@@ -18,10 +18,15 @@ import static quest.yuzhou.portalsystem.Utilities.PortalStorageUtil.getPortals;
 
 public class PlayerInteractListener implements Listener {
 
+    long nextAvailableTime;
+
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent e) {
         Player player = e.getPlayer();
         Block block = e.getClickedBlock();
+
+        if (nextAvailableTime > System.currentTimeMillis()) return;
+        nextAvailableTime = System.currentTimeMillis() + 100L; // 0.1s cooldown
 
         try {
             if (block == null) {
@@ -38,33 +43,35 @@ public class PlayerInteractListener implements Listener {
                 return;
             }
 
+            Portal matchedPortal = null;
             for (Portal portal : getPortals()) {
                 if (
                         portal.getLocation().getBlockX() == block.getLocation().getBlockX() &&
                         portal.getLocation().getBlockZ() == block.getLocation().getBlockZ()
                 ) {
-                    e.setCancelled(true);
+                    matchedPortal = portal;
+                    break;  // Exit loop after finding match
+                }
+            }
 
-                    if (portal.getBlockHp() != 0) {
-                        if (!portal.getAllMembers().contains(player.getUniqueId().toString())) {
-                            player.sendMessage(prefix + " 傳送門名稱：" + ChatColor.YELLOW + portal.getName());
-                            player.sendMessage(prefix + " 守護石血量：" + ChatColor.BLUE + portal.getBlockHp());
-                            player.sendMessage(prefix + " 守護石等級：" + ChatColor.BLUE + portal.getBlockLevel());
-                            player.sendMessage(prefix + " 成員總人數：" + ChatColor.BLUE + portal.getAllMembers().size());
-                            return;
-                        }
+            if (matchedPortal != null) {
+                e.setCancelled(true);
 
-                    }
-
-                    World targetWorld = (block.getWorld() == mainWorld) ? virtualWorld : mainWorld;
-                    int x = block.getX();
-                    int y = (block.getWorld() == mainWorld) ? block.getY() : getPlugin().getConfig().getInt("virtualPortalYCoordinate");
-                    int z = block.getZ();
-
-                    player.teleport(new Location(targetWorld, x, y, z));
-                    player.sendMessage(prefix + ChatColor.YELLOW + " 傳送成功！");
+                if (matchedPortal.getBlockHp() != 0 && !matchedPortal.getAllMembers().contains(player.getUniqueId().toString())) {
+                    player.sendMessage(prefix + " 傳送門名稱：" + ChatColor.YELLOW + matchedPortal.getName());
+                    player.sendMessage(prefix + " 守護石血量：" + ChatColor.BLUE + matchedPortal.getBlockHp());
+                    player.sendMessage(prefix + " 守護石等級：" + ChatColor.BLUE + matchedPortal.getBlockLevel());
+                    player.sendMessage(prefix + " 成員總人數：" + ChatColor.BLUE + matchedPortal.getAllMembers().size());
                     return;
                 }
+
+                World targetWorld = (block.getWorld() == mainWorld) ? virtualWorld : mainWorld;
+                int x = block.getX();
+                int y = (block.getWorld() == mainWorld) ? getPlugin().getConfig().getInt("virtualPortalYCoordinate") : block.getY();
+                int z = block.getZ();
+
+                player.teleport(new Location(targetWorld, x, y, z));
+                player.sendMessage(prefix + ChatColor.YELLOW + " 傳送成功！");
             }
         } catch (NullPointerException exception) {
             exception.printStackTrace();

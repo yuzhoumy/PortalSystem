@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import quest.yuzhou.portalsystem.Commands.SubCommand;
+import quest.yuzhou.portalsystem.Commands.AdminSubCommand;
 import quest.yuzhou.portalsystem.Modal.Portal;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import static quest.yuzhou.portalsystem.PortalSystem.getPlugin;
 import static quest.yuzhou.portalsystem.PortalSystem.prefix;
 import static quest.yuzhou.portalsystem.Utilities.PortalStorageUtil.getPortals;
 
-public class listallportalsCommand extends SubCommand {
+public class listallportalsCommand extends AdminSubCommand {
 
     @Override
     public String getName() {
